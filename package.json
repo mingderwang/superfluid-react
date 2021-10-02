@@ -1,5 +1,5 @@
 {
-  "name": "superfluid-react",
+  "name": "@muzamint/superfluid-react",
   "version": "0.0.1",
   "description": "connect metamask and superfluid",
   "author": "Ming-der Wang",
