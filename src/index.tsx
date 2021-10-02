@@ -2,6 +2,23 @@ import * as React from 'react'
 import { useState, useEffect } from 'react'
 import styles from './styles.module.css'
 import { Sdk, Env, EnvNames, MetaMaskWalletProvider } from 'etherspot'
+import {
+  abi,
+  ethers,
+  SuperXEROX_Contract_Address_Ropsten,
+  Web3Provider,
+  Contract,
+  BigNumber
+} from 'superxerox-sdk'
+
+const provider: Web3Provider = new ethers.providers.Web3Provider(
+  window.ethereum
+)
+const superXeroXContract_ro = new Contract(
+  SuperXEROX_Contract_Address_Ropsten,
+  abi,
+  provider
+)
 
 const message1 = '👻 Metamask is not detected'
 const message2 = '📡 Fail on create Etherspot Sdk Account'
@@ -16,7 +33,6 @@ Env.defaultName = 'testnets' as EnvNames
 
 declare let window: any
 export const ExampleComponent = ({ text }: Props) => {
-  const [, setVal] = useState(0)
 
   useEffect(() => {
     handleConnetion()
@@ -56,17 +72,29 @@ export const ExampleComponent = ({ text }: Props) => {
   const [address, setAddress] = useState('')
   const [network, setNetwork] = useState('')
   const [, setConnected] = useState(false)
+  const [, setVal] = useState(0)
+  const [netflow, setNetflow] = useState('')
+  let total: BigNumber = BigNumber.from("0")
 
   useEffect(() => {
     const timer = window.setInterval(() => {
       setVal((v: number) => v + 1)
-    }, 1000)
+      try {
+        superXeroXContract_ro.getNetFlow().then((x: BigNumber) => {
+          total = total.add(x)
+          setNetflow(ethers.utils.formatEther(total))
+        })
+      } catch (error) {
+        console.log('error', error)
+      }
+    }, 100)
     return () => window.clearInterval(timer)
   }, [])
 
   return (
     <div className={styles.test}>
-      👑 {text} {' '} {address} 🚀 {network}
+      👑 {text} {address} 🚀 {network}
+      {'🐝'} netflow = {netflow}
     </div>
   )
 }
