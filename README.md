@@ -7,22 +7,22 @@
 ## Install
 
 ```bash
-npm install --save my-crl
+npm install --save @muzamint/superfluid-react
 ```
 
 ## Usage
 
 ```tsx
-import React, { Component } from 'react'
+import React from 'react'
 
-import MyComponent from 'my-crl'
-import 'my-crl/dist/index.css'
+import { ExampleComponent } from '@muzamint/superfluid-react'
+import '@muzamint/superfluid-react/dist/index.css'
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+const App = () => {
+  return <ExampleComponent text="SuperFluid Example 😄" />
 }
+
+export default App
 ```
 
 ## License
