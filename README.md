@@ -1,4 +1,4 @@
-# my-crl
+# superfluid-react-components 
 
 > Made with create-react-library
 
@@ -27,4 +27,4 @@ export default App
 
 ## License
 
-MIT © [IPDID](https://github.com/IPDID)
+MIT ©2021 [MS-hack](https://github.com/MS-hack)
